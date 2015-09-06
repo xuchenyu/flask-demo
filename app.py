@@ -1,9 +1,8 @@
 import requests, os
-from flask import Flask, render_template, request, redirect
 from pandas import *
+from flask import Flask, render_template, request, redirect
 from bokeh.plotting import figure, show, output_file, output_notebook
 from bokeh.embed import components
-from bokeh.resources import CDN
 
 app = Flask(__name__)
 
@@ -46,11 +45,11 @@ def show_graph():
         p.line(df['Date'], df['Volume'], color='#FB9A99', legend='Volume')
     p.legend.orientation = 'top_left'
     
-    script, div = components(p, CDN)
+    script, div = components(p)
 
     return render_template('graph.html', ticker=ticker, script=script, div=div)
     
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
-  
+
