@@ -1,7 +1,7 @@
 import requests, os
 from pandas import *
 from flask import Flask, render_template, request, redirect
-from bokeh.plotting import figure, show, output_file, output_notebook
+from bokeh.plotting import figure
 from bokeh.embed import components
 
 app = Flask(__name__)
@@ -34,7 +34,6 @@ def show_graph():
         return datetime(int(y), int(m), int(d))
     df['Date'] = df['Date'].map(convert_date)
     
-    output_file('templates/bokeh_plot.html', title='Stock Data')
     TOOLS = 'pan, box_zoom, wheel_zoom, reset, save'
     p = figure(x_axis_type='datetime', x_axis_label = 'Date', y_axis_label = 'Stock Data', tools=TOOLS, toolbar_location='above')
     if close:
