@@ -1,5 +1,5 @@
+import requests, os
 from flask import Flask, render_template, request, redirect
-import requests
 from pandas import *
 from bokeh.plotting import figure, show, output_file, output_notebook
 from bokeh.embed import components
@@ -51,5 +51,6 @@ def show_graph():
     return render_template('graph.html', ticker=ticker, script=script, div=div)
     
 if __name__ == '__main__':
-    app.run()
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
   
